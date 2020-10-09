@@ -1,4 +1,4 @@
-package com.altergo;
+package com.altergo.mobile;
 
 import com.facebook.react.ReactActivity;
 

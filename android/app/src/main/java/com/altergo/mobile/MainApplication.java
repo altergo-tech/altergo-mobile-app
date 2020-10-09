@@ -1,4 +1,4 @@
-package com.altergo;
+package com.altergo.mobile;
 
 import android.app.Application;
 import android.content.Context;
