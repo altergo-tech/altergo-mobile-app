@@ -159,7 +159,7 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         ndkVersion rootProject.ext.ndkVersion
 
-        versionCode 4
+        versionCode 5
         versionName "1.0.0"
 
         ndk {
