@@ -20,7 +20,7 @@ jobs:
       - name: Install npm dependencies
         run: |
           yarn install
-      - name: Build Android Release:
+      - name: Build Android Release
         env:
           ALTERGO_KEYSTORE_FILE: ${{ secrets.ALTERGO_KEYSTORE_FILE }}
           ALTERGO_KEYSTORE_PASSWORD: ${{ secrets.ALTERGO_KEYSTORE_PASSWORD }}
