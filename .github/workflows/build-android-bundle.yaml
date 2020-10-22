@@ -25,6 +25,7 @@ jobs:
           ALTERGO_KEYSTORE_FILE: ${{ secrets.ALTERGO_KEYSTORE_FILE }}
           ALTERGO_KEYSTORE_PASSWORD: ${{ secrets.ALTERGO_KEYSTORE_PASSWORD }}
           ALTERGO_KEY_ALIAS: ${{ secrets.ALTERGO_KEY_ALIAS }}
+          ALTERGO_KEY_PASSWORD: ${{ secrets.ALTERGO_KEY_PASSWORD }}
         run: |
           cd android && ./gradlew bundleRelease
       - name: Upload Artifact
