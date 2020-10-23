@@ -27,6 +27,7 @@ jobs:
           ALTERGO_KEY_ALIAS: ${{ secrets.ALTERGO_KEY_ALIAS }}
           ALTERGO_KEY_PASSWORD: ${{ secrets.ALTERGO_KEY_PASSWORD }}
         run: |
+          npx react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res
           cd android && ./gradlew bundleRelease
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
