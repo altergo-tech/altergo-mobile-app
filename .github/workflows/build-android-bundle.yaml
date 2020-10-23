@@ -6,7 +6,7 @@ on:
         description: 'Version name'
         default: '1.0.0'
       versionCode:
-        description: 'Version code'     
+        description: 'Version code'
         required: true
         default: 1
 
@@ -27,7 +27,7 @@ jobs:
       - name: Install npm dependencies
         run: yarn install
       - name: Build
-        run: ./android/gradlew app:bundleRelease -p android
+        run: cd android && ./gradlew bundleRelease
         env:
           ALTERGO_KEYSTORE_FILE: ${{ secrets.ALTERGO_KEYSTORE_FILE }}
           ALTERGO_KEYSTORE_PASSWORD: ${{ secrets.ALTERGO_KEYSTORE_PASSWORD }}
