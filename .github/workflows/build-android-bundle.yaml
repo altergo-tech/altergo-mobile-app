@@ -1,8 +1,5 @@
 name: react-native-android
 on:
-  push:
-    branches:
-    - master
   workflow_dispatch:
     inputs:
       versionName:
