@@ -17,8 +17,7 @@ import com.android.build.OutputFile
  *   bundleAssetName: "index.android.bundle",
  *
  *   // the entry file for bundle generation. If none specified and
- *   // "index.android.js" exists, it will be used. Otherwise "index.js" is
- *   // default. Can be overridden with ENTRY_FILE environment variable.
+ *   // "index.android.js" exists, it will be used. Othlt. Can be overridden with ENTRY_FILE environment variable.
  *   entryFile: "index.android.js",
  *
  *   // https://reactnative.dev/docs/performance#enable-the-ram-format
@@ -81,6 +80,7 @@ import com.android.build.OutputFile
 project.ext.react = [
     enableHermes: true,  // clean and rebuild if changing
     bundleInDebug: false,
+    bundleInRelease: true,
 ]
 
 apply from: "../../node_modules/react-native/react.gradle"
@@ -145,6 +145,11 @@ def getKeyPassword = { ->
     return result
 }
 
+def getVersionName = { ->
+    def result = System.getenv("GITHUB_RUN_ID") ? 1 : ""
+    return result
+}
+
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
 
@@ -159,7 +164,7 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         ndkVersion rootProject.ext.ndkVersion
 
-        versionCode 5
+        versionCode getVersionName()
         versionName "1.0.0"
 
         ndk {
