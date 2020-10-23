@@ -30,7 +30,7 @@ jobs:
       - name: Install npm dependencies
         run: yarn install
       - name: Build
-        run: ./android/gradlew bundleRelease
+        run: ./android/gradlew bundleRelease -p android
         env:
           ALTERGO_KEYSTORE_FILE: ${{ secrets.ALTERGO_KEYSTORE_FILE }}
           ALTERGO_KEYSTORE_PASSWORD: ${{ secrets.ALTERGO_KEYSTORE_PASSWORD }}
