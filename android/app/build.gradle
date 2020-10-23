@@ -80,7 +80,7 @@ import com.android.build.OutputFile
 project.ext.react = [
     bundleAssetName: "index.android.bundle",
     entryFile: "index.js",
-]   enableHermes: true,  // clean and rebuild if changing
+    enableHermes: true,  // clean and rebuild if changing
     bundleInDebug: false,
     bundleInRelease: true,
 ]
