@@ -225,7 +225,11 @@ android {
         }
     }
 }
-
+project.afterEvaluate {
+        tasks.findAll { task ->
+            task.name.startsWith('merge') && task.name.endsWith('Resources')
+        }.each { t -> t.dependsOn "copyReleaseBundledJs" }
+}
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     //noinspection GradleDynamicVersion
