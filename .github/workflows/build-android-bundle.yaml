@@ -14,25 +14,23 @@ on:
         default: 1
 
 jobs:
-  install:
+  lint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: Install npm dependencies
         run: yarn install
-  lint:
-    runs-on: ubuntu-latest
-    if: github.event_name == 'push'
-    needs: [install]
-    steps:
       - name: Lint
         run: yarn lint
   build-android:
     runs-on: ubuntu-latest
     if: github.event_name == 'workflow_dispatch'
-    needs: [install]
     steps:
+      - uses: actions/checkout@v2
+      - name: Install npm dependencies
+        run: yarn install
       - name: Build
+        run: ./android/gradlew bundleRelease
         env:
           ALTERGO_KEYSTORE_FILE: ${{ secrets.ALTERGO_KEYSTORE_FILE }}
           ALTERGO_KEYSTORE_PASSWORD: ${{ secrets.ALTERGO_KEYSTORE_PASSWORD }}
@@ -40,7 +38,6 @@ jobs:
           ALTERGO_KEY_PASSWORD: ${{ secrets.ALTERGO_KEY_PASSWORD }}
           VERSION_NAME: ${{ github.event.inputs.versionName }}
           VERSION_CODE: ${{ github.event.inputs.versionCode }}
-        run: ./android/gradlew bundleRelease
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
         with:
