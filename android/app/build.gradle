@@ -80,6 +80,7 @@ import com.android.build.OutputFile
 project.ext.react = [
     bundleAssetName: "index.android.bundle",
     entryFile: "index.js",
+    jsBundleDirRelease: "$buildDir/generated/assets/react/release/",
     enableHermes: true,  // clean and rebuild if changing
     bundleInDebug: false,
     bundleInRelease: true,
