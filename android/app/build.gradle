@@ -153,7 +153,7 @@ def getVersionName = { ->
 }
 
 def getVersionCode = { ->
-    def result = System.getenv("VERSION_CODE") ? System.getenv("VERSION_CODE") : 1
+    def result = System.getenv("VERSION_CODE") ? System.getenv("VERSION_CODE") : "1"
     return result
 }
 
@@ -171,7 +171,7 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         ndkVersion rootProject.ext.ndkVersion
 
-        versionCode getVersionCode()
+        versionCode Integer.parseInt(getVersionCode())
         versionName getVersionName()
 
         ndk {
