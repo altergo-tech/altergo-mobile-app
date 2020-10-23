@@ -1,34 +1,46 @@
-name: react-native-android-bundle-build
+name: react-native-android
 on:
   push:
     branches:
-      - master
+    - master
+  workflow_dispatch:
+    inputs:
+      versionName:
+        description: 'Version name'
+        default: '1.0.0'
+      versionCode:
+        description: 'Version code'     
+        required: true
+        default: 1
 
 jobs:
-  install-and-test:
+  install:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: Install npm dependencies
-        run: |
-          yarn install
+        run: yarn install
+  lint:
+    runs-on: ubuntu-latest
+    if: github.event == 'push'
+    needs: [install]
+    steps:
+      - name: Lint
+        run: yarn lint
   build-android:
-    needs: install-and-test
     runs-on: ubuntu-latest
+    if: github.event == 'workflow_dispatch'
+    needs: [install]
     steps:
-      - uses: actions/checkout@v2
-      - name: Install npm dependencies
-        run: |
-          yarn install
-      - name: Build Android Release
+      - name: Build
         env:
           ALTERGO_KEYSTORE_FILE: ${{ secrets.ALTERGO_KEYSTORE_FILE }}
           ALTERGO_KEYSTORE_PASSWORD: ${{ secrets.ALTERGO_KEYSTORE_PASSWORD }}
           ALTERGO_KEY_ALIAS: ${{ secrets.ALTERGO_KEY_ALIAS }}
           ALTERGO_KEY_PASSWORD: ${{ secrets.ALTERGO_KEY_PASSWORD }}
-        run: |
-          npx react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res
-          cd android && ./gradlew bundleRelease
+          VERSION_NAME: ${{ github.event.inputs.versionName }}
+          VERSION_CODE: ${{ github.event.inputs.versionCode }}
+        run: ./android/gradlew bundleRelease
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
         with:
