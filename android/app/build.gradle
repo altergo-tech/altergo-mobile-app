@@ -148,7 +148,12 @@ def getKeyPassword = { ->
 }
 
 def getVersionName = { ->
-    def result = System.getenv("GITHUB_RUN_ID") ? 6 : ""
+    def result = System.getenv("VERSION_NAME") ? System.getenv("VERSION_NAME") : "1.0.0"
+    return result
+}
+
+def getVersionCode = { ->
+    def result = System.getenv("VERSION_CODE") ? System.getenv("VERSION_CODE") : 1
     return result
 }
 
@@ -166,8 +171,8 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         ndkVersion rootProject.ext.ndkVersion
 
-        versionCode getVersionName()
-        versionName "1.0.0"
+        versionCode getVersionCode()
+        versionName getVersionName()
 
         ndk {
             abiFilters "armeabi-v7a", "x86", "arm64-v8a", "x86_64"
