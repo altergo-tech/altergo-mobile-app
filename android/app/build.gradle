@@ -148,7 +148,7 @@ def getKeyPassword = { ->
 }
 
 def getVersionName = { ->
-    def result = System.getenv("GITHUB_RUN_ID") ? 1 : ""
+    def result = System.getenv("GITHUB_RUN_ID") ? 6 : ""
     return result
 }
 
