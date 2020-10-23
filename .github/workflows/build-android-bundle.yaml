@@ -27,9 +27,9 @@ jobs:
           ALTERGO_KEY_ALIAS: ${{ secrets.ALTERGO_KEY_ALIAS }}
           ALTERGO_KEY_PASSWORD: ${{ secrets.ALTERGO_KEY_PASSWORD }}
         run: |
-          cd android && ./gradlew bundleRelease
+          cd android && ./gradlew assembleRelease
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
         with:
-          name: app-release.bundle
-          path: android/app/build/outputs/bundle/release/
+          name: app-release.apk
+          path: android/app/build/outputs/apk/release/
