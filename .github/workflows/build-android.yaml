@@ -21,7 +21,7 @@ jobs:
         run: yarn install
 
       - name: Lint
-        run: yarn lint
+        run: yarn lint && npx conventional-changelog -p angular -i CHANGELOG.md -s && cat CHANGELOG.md
 
   build-android:
     runs-on: ubuntu-latest
