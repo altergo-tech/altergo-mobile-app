@@ -1,0 +1,202 @@
+apply plugin: "com.android.application"
+apply plugin: 'kotlin-android'
+
+import com.android.build.OutputFile
+
+project.ext.react = [
+    bundleAssetName: "index.android.bundle",
+    entryFile: "index.js",
+    bundleInDebug: false,
+    bundleInRelease: true,
+    root: "../../",
+    enableHermes: true,
+    jsBundleDirDebug: "$buildDir/intermediates/assets/debug",
+    jsBundleDirRelease: "$buildDir/intermediates/assets/release",
+    resourcesDirDebug: "$buildDir/intermediates/res/merged/debug",
+    resourcesDirRelease: "$buildDir/intermediates/res/merged/release",
+    inputExcludes: ["android/**", "ios/**"],
+    nodeExecutableAndArgs: ["node"],
+    extraPackagerArgs: []
+]
+
+apply from: "../../node_modules/react-native/react.gradle"
+
+/**
+ * Set this to true to create two separate APKs instead of one:
+ *   - An APK that only works on nARM devices
+ *   - An APK that only works on x86 devices
+ * The advantage is the size of the APK is reduced by about 4MB.
+ * Upload all the APKs to the Play Store and people will download
+ * the correct one based on the CPU architecture of their device.
+ */
+def enableSeparateBuildPerCPUArchitecture = false
+
+/**
+ * Run Proguard to shrink the Java bytecode in release builds.
+ */
+def enableProguardInReleaseBuilds = false
+
+/**
+ * The preferred build flavor of JavaScriptCore.
+ *
+ * For example, to use the international variant, you can use:
+ * `def jscFlavor = 'org.webkit:android-jsc-intl:+'`
+ *
+ * The international variant includes ICU i18n library and necessary data
+ * allowing to use e.g. `Date.toLocaleString` and `String.localeCompare` that
+ * give correct results when using with locales other than en-US.  Note that
+ * this variant is about 6MiB larger per architecture than default.
+ */
+def jscFlavor = 'org.webkit:android-jsc-intl:+'
+
+/**
+ * Whether to enable the Hermes VM.
+ *
+ * This should be set on project.ext.react and mirrored here.  If it is not set
+ * on project.ext.react, JavaScript will not be compiled to Hermes Bytecode
+ * and the benefits of using Hermes will therefore be sharply reduced.
+ */
+def enableHermes = project.ext.react.get("enableHermes", false);
+
+/**
+ * Env
+ */
+def getKeystoreFile = { ->
+    def result = System.getenv("ALTERGO_KEYSTORE_FILE") ? System.getenv("ALTERGO_KEYSTORE_FILE") : "null"
+    return result
+}
+
+def getKeystorePassword = { ->
+    def result = System.getenv("ALTERGO_KEYSTORE_PASSWORD") ? System.getenv("ALTERGO_KEYSTORE_PASSWORD") : ""
+    return result
+}
+
+def getKeyAlias = { ->
+    def result = System.getenv("ALTERGO_KEY_ALIAS") ? System.getenv("ALTERGO_KEY_ALIAS") : ""
+    return result
+}
+
+def getKeyPassword = { ->
+    def result = System.getenv("ALTERGO_KEY_PASSWORD") ? System.getenv("ALTERGO_KEY_PASSWORD") : ""
+    return result
+}
+
+def getVersionName = { ->
+    def result = System.getenv("VERSION_NAME") ? System.getenv("VERSION_NAME") : "1.0.0"
+    return result
+}
+
+def getVersionCode = { ->
+    def result = System.getenv("VERSION_CODE") ? System.getenv("VERSION_CODE") : "1"
+    return result
+}
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    defaultConfig {
+        applicationId "com.altergo.mobile"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        ndkVersion rootProject.ext.ndkVersion
+
+        versionCode Integer.parseInt(getVersionCode())
+        versionName getVersionName()
+
+        ndk {
+            abiFilters "arm64-v8a", "x86_64", "x86"
+            debugSymbolLevel = 'FULL'
+        }
+    }
+    // apk
+    splits {
+        abi {
+            reset()
+            enable enableSeparateBuildPerCPUArchitecture
+            universalApk false
+            include "x86", "arm64-v8a"
+        }
+    }
+    // bundle
+    bundle {
+        abi {
+            enableSplit = true
+        }
+    }
+    signingConfigs {
+        release {
+            storeFile file(getKeystoreFile())
+            storePassword getKeystorePassword()
+            keyAlias getKeyAlias()
+            keyPassword getKeyPassword()
+        }
+        debug {
+            storeFile file("keystores/debug.keystore")
+            storePassword "android"
+            keyAlias "androiddebugkey"
+            keyPassword "android"
+        }
+    }
+    buildTypes {
+        debug {
+            signingConfig signingConfigs.debug
+        }
+        release {
+            signingConfig signingConfigs.release
+            minifyEnabled enableProguardInReleaseBuilds
+            shrinkResources enableProguardInReleaseBuilds
+            proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
+        }
+    }
+
+    // applicationVariants are e.g. debug, release
+    applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            def versionCodes = ["arm64-v8a": 1, "x86": 3]
+            def abi = output.getFilter(OutputFile.ABI)
+            if (abi != null) {  // null for the universal-debug, universal-release variants
+                output.versionCodeOverride =
+                        versionCodes.get(abi) * 1048576 + defaultConfig.versionCode
+            }
+
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    //noinspection GradleDynamicVersion
+    implementation "com.facebook.react:react-native:+"  // From node_modules
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
+    implementation 'com.google.android.play:core-ktx:1.8.1'
+
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
+
+    debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {
+      exclude group:'com.facebook.fbjni'
+    }
+
+    debugImplementation("com.facebook.flipper:flipper-network-plugin:${FLIPPER_VERSION}") {
+        exclude group:'com.facebook.flipper'
+    }
+
+    debugImplementation("com.facebook.flipper:flipper-fresco-plugin:${FLIPPER_VERSION}") {
+        exclude group:'com.facebook.flipper'
+    }
+
+    if (enableHermes) {
+        def hermesPath = "../../node_modules/hermes-engine/android/";
+        debugImplementation files(hermesPath + "hermes-debug.aar")
+        releaseImplementation files(hermesPath + "hermes-release.aar")
+    } else {
+        implementation jscFlavor
+    }
+}
+
+apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
