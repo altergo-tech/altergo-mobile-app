@@ -93,6 +93,7 @@ def getVersionCode = { ->
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
+    ndkVersion ndkVersion
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
