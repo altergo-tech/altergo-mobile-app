@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "react": "16.13.1",
-    "react-native": "0.63.3"
+    "react-native": "0.63.4"
   },
   "devDependencies": {
     "@altergo/prettier-config": "1.0.2",
@@ -19,7 +19,7 @@
     "@babel/runtime": "7.12.1",
     "@react-native-community/eslint-config": "2.0.0",
     "@types/jest": "26.0.15",
-    "@types/react-native": "0.63.30",
+    "@types/react-native": "0.63.45",
     "@types/react-test-renderer": "16.9.2",
     "@typescript-eslint/eslint-plugin": "2.27.0",
     "@typescript-eslint/parser": "2.27.0",

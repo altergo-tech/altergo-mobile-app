@@ -1028,7 +1028,7 @@
     "@types/yargs" "^15.0.0"
     chalk "^3.0.0"
 
-"@jest/types@^26.6.0", "@jest/types@^26.6.1":
+"@jest/types@^26.6.1":
   version "26.6.1"
   resolved "https://registry.yarnpkg.com/@jest/types/-/types-26.6.1.tgz#2638890e8031c0bc8b4681e0357ed986e2f866c5"
   integrity sha512-ywHavIKNpAVrStiRY5wiyehvcktpijpItvGiK72RAn5ctqmzvPk8OvKnvHeBqa1XdQr959CTWAJMqxI8BTibyg==
@@ -1313,10 +1313,10 @@
   resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.7.3.tgz#2ab0d5da2e5815f94b0b9d4b95d1e5f243ab2ca7"
   integrity sha512-KfRL3PuHmqQLOG+2tGpRO26Ctg+Cq1E01D2DMriKEATHgWLfeNDmq9e29Q9WIky0dQ3NPkd1mzYH8Lm936Z9qw==
 
-"@types/react-native@0.63.30":
-  version "0.63.30"
-  resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.63.30.tgz#a0bd61e61b7a020a538ea22901be2f5d178fe02f"
-  integrity sha512-8/PrOjuUaPTCfMeW12ubseZPUGdbRhxYDa/aT+0D0KWVTe60b4H/gJrcfJmBXC6EcCFcimuTzQCv8/S03slYqA==
+"@types/react-native@0.63.45":
+  version "0.63.45"
+  resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.63.45.tgz#944a471d1e40e22eb8eae4369db7facf697c545e"
+  integrity sha512-HvsHe8hbcAuZJKcqUEN+E/qV1TNjL6venNUiQvDi7d1IlEK6ZyTrpIS937PwiNWc3UePNzR0xZ++aqpMAJqz1A==
   dependencies:
     "@types/react" "*"
 
@@ -5589,17 +5589,7 @@ pretty-format@^25.1.0, pretty-format@^25.2.0:
     ansi-styles "^4.0.0"
     react-is "^16.12.0"
 
-pretty-format@^26.0.0, pretty-format@^26.6.0:
-  version "26.6.0"
-  resolved "https://registry.yarnpkg.com/pretty-format/-/pretty-format-26.6.0.tgz#1e1030e3c70e3ac1c568a5fd15627671ea159391"
-  integrity sha512-Uumr9URVB7bm6SbaByXtx+zGlS+0loDkFMHP0kHahMjmfCtmFY03iqd++5v3Ld6iB5TocVXlBN/T+DXMn9d4BA==
-  dependencies:
-    "@jest/types" "^26.6.0"
-    ansi-regex "^5.0.0"
-    ansi-styles "^4.0.0"
-    react-is "^16.12.0"
-
-pretty-format@^26.6.1:
+pretty-format@^26.0.0, pretty-format@^26.6.0, pretty-format@^26.6.1:
   version "26.6.1"
   resolved "https://registry.yarnpkg.com/pretty-format/-/pretty-format-26.6.1.tgz#af9a2f63493a856acddeeb11ba6bcf61989660a8"
   integrity sha512-MeqqsP5PYcRBbGMvwzsyBdmAJ4EFX7pWFyl7x4+dMVg5pE0ZDdBIvEH2ergvIO+Gvwv1wh64YuOY9y5LuyY/GA==
@@ -5701,10 +5691,10 @@ react-is@^17.0.1:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-17.0.1.tgz#5b3531bd76a645a4c9fb6e693ed36419e3301339"
   integrity sha512-NAnt2iGDXohE5LI7uBnLnqvLQMtzhkiAOLXTmv+qnF9Ky7xAPcX8Up/xWIhxvLVGJvuLiNc4xQLtuqDRzb4fSA==
 
-react-native@0.63.3:
-  version "0.63.3"
-  resolved "https://registry.yarnpkg.com/react-native/-/react-native-0.63.3.tgz#4a7f6540e049ff41810887bbd1125abc4672f3bf"
-  integrity sha512-71wq13uNo5W8QVQnFlnzZ3AD+XgUBYGhpsxysQFW/hJ8GAt/J5o+Bvhy81FXichp6IBDJDh/JgfHH2gNji8dFA==
+react-native@0.63.4:
+  version "0.63.4"
+  resolved "https://registry.yarnpkg.com/react-native/-/react-native-0.63.4.tgz#2210fdd404c94a5fa6b423c6de86f8e48810ec36"
+  integrity sha512-I4kM8kYO2mWEYUFITMcpRulcy4/jd+j9T6PbIzR0FuMcz/xwd+JwHoLPa1HmCesvR1RDOw9o4D+OFLwuXXfmGw==
   dependencies:
     "@babel/runtime" "^7.0.0"
     "@react-native-community/cli" "^4.10.0"
