@@ -1,6 +1,6 @@
 {
-  "name": "altergo-mobile-app",
-  "version": "0.1.0",
+  "name": "mobile-app",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "android": "react-native run-android --no-packager",
