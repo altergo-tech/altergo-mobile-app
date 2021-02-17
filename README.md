@@ -1,1 +1,1 @@
-# altergo-mobile-app
+# mobile-app
