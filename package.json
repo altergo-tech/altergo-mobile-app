@@ -15,7 +15,7 @@
   },
   "devDependencies": {
     "@altergo/prettier-config": "1.0.2",
-    "@babel/core": "7.12.16",
+    "@babel/core": "7.13.10",
     "@babel/runtime": "7.12.13",
     "@react-native-community/eslint-config": "2.0.0",
     "@types/jest": "26.0.15",
